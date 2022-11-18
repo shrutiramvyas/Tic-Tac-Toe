@@ -13,6 +13,7 @@ public class TicTacToeGame {
     String player1 = userName;
     String player2 = "computer";
     String player = player1;
+    String winner = null;
     //create constructor
     public TicTacToeGame(String[] board) {
         TicTacToeGame.board = board;
@@ -52,11 +53,18 @@ public class TicTacToeGame {
     }
     public void checkInput(String userName) {
         System.out.println(userName + " Turn, Enter a slot number : ");
+        while (winner == null) {
             int slotInput;
+            try {
                 slotInput = scan.nextInt();
                 if (slotInput < 0 || slotInput > 9) {
                     System.out.println("Invalid input, Please re-enter the slot");
+                    continue;
                 }
+            } catch (InputMismatchException e) {
+                System.out.println("Invalid number,Please reEnter slot number");
+                continue;
+            }
             if (board[slotInput - 1].equals(String.valueOf(slotInput))) {
                 board[slotInput - 1] = turn;
                 if (turn.equals("x")) {
@@ -68,10 +76,12 @@ public class TicTacToeGame {
                     player = player1;
                 }
                 draw();
+                winner = checkWinner(turn);
             } else {
                 System.out.println("slot already taken,renter slot");
             }
         }
+    }
     public void draw(){
         System.out.println("|-----------|");
         System.out.println("| " + board[0] + " | " + board[1] + " | " + board[2] + " |");
@@ -81,7 +91,9 @@ public class TicTacToeGame {
         System.out.println("| " + board[6] + " | " + board[7] + " | " + board[8] + " |");
         System.out.println("|-----------|");
     }
-
+    public void checkWinner(String turn){
+        System.out.println("checking winner");
+    }
     public static void main(String[] args) {
         //Create Array Board
         String[] board = new String[10];
@@ -97,6 +109,5 @@ public class TicTacToeGame {
         //display board
         game.draw();
         game.checkInput(userName);
-
         }
     }
