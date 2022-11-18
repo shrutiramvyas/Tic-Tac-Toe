@@ -91,8 +91,9 @@ public class TicTacToeGame {
         System.out.println("| " + board[6] + " | " + board[7] + " | " + board[8] + " |");
         System.out.println("|-----------|");
     }
-    public void checkWinner(String turn){
+    public String checkWinner(String turn){
         System.out.println("checking winner");
+        return turn;
     }
     public static void main(String[] args) {
         //Create Array Board
