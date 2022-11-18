@@ -20,19 +20,19 @@ public class TicTacToeGame {
         String userName = scan.nextLine();
         System.out.println("Welcome " + userName + " to the World of Tic-Tac-Toe Game");
     }
+
     public void chooseLetter(){
-        System.out.println(userName + ", Please choose your Favourite word 'X' or 'O' ");
+        System.out.println("Please choose your Favourite word 'X' or 'O' ");
         String check = scan.nextLine();
         String cLetter = checkLetter(check);
         while (cLetter == null){
-            System.out.println(userName + ", Please choose your Favourite word 'X' or 'O' ");
+            System.out.println("Please choose your Favourite word 'X' or 'O' ");
             check = scan.nextLine();
             cLetter = checkLetter(check);
         }
         System.out.println("You choose " + cLetter);
     }
     public String checkLetter(String check){
-        System.out.println(check);
         switch(check){
             case "X":
             case "x":
@@ -44,6 +44,15 @@ public class TicTacToeGame {
                 System.out.println("Wrong choice");
                 return null;
         }
+    }
+    public void draw(){
+        System.out.println("|-----------|");
+        System.out.println("| " + board[0] + " | " + board[1] + " | " + board[2] + " |");
+        System.out.println("|-----------|");
+        System.out.println("| " + board[3] + " | " + board[4] + " | " + board[5] + " |");
+        System.out.println("|-----------|");
+        System.out.println("| " + board[6] + " | " + board[7] + " | " + board[8] + " |");
+        System.out.println("|-----------|");
     }
 
     public static void main(String[] args) {
@@ -58,6 +67,8 @@ public class TicTacToeGame {
         game.askName();
         //Ask them to choose letter
         game.chooseLetter();
+        //display board
+        game.draw();
 
         }
     }
