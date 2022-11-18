@@ -9,16 +9,21 @@ public class TicTacToeGame {
     //Create Instance array
     static String board[];
     String userName;
+    String turn = "X";
+    String player1 = userName;
+    String player2 = "computer";
+    String player = player1;
     //create constructor
     public TicTacToeGame(String[] board) {
         TicTacToeGame.board = board;
     }
     //Ask Name method
-    public void askName(){
+    public String askName(){
         Scanner scan = new Scanner(System.in);
         System.out.println("Please enter your name: ");
         String userName = scan.nextLine();
         System.out.println("Welcome " + userName + " to the World of Tic-Tac-Toe Game");
+        return userName;
     }
 
     public void chooseLetter(){
@@ -45,6 +50,28 @@ public class TicTacToeGame {
                 return null;
         }
     }
+    public void checkInput(String userName) {
+        System.out.println(userName + " Turn, Enter a slot number : ");
+            int slotInput;
+                slotInput = scan.nextInt();
+                if (slotInput < 0 || slotInput > 9) {
+                    System.out.println("Invalid input, Please re-enter the slot");
+                }
+            if (board[slotInput - 1].equals(String.valueOf(slotInput))) {
+                board[slotInput - 1] = turn;
+                if (turn.equals("x")) {
+                    turn = "o";
+                    player = player2;
+
+                } else {
+                    turn = "x";
+                    player = player1;
+                }
+                draw();
+            } else {
+                System.out.println("slot already taken,renter slot");
+            }
+        }
     public void draw(){
         System.out.println("|-----------|");
         System.out.println("| " + board[0] + " | " + board[1] + " | " + board[2] + " |");
@@ -64,11 +91,12 @@ public class TicTacToeGame {
 
         //Ask name Object
         TicTacToeGame game = new TicTacToeGame(board);
-        game.askName();
+        String userName=game.askName();
         //Ask them to choose letter
         game.chooseLetter();
         //display board
         game.draw();
+        game.checkInput(userName);
 
         }
     }
